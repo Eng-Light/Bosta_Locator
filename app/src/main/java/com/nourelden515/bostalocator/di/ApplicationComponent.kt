@@ -2,6 +2,7 @@ package com.nourelden515.bostalocator.di
 
 import android.content.Context
 import com.nourelden515.bostalocator.ui.MainActivity
+import com.nourelden515.bostalocator.ui.choosedeliveryarea.ChooseDeliveryAreaFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,8 +17,8 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
+    fun inject(fragment: ChooseDeliveryAreaFragment)
 
-    // fun inject(fragment: SearchCitiesFragment)
 
     @Component.Factory
     interface Factory {
