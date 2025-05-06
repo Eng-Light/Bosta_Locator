@@ -12,9 +12,7 @@ import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
 interface LocatorRepository {
-    suspend fun getCities(
-        countryId: String = "60e4482c7cb7d4bc4849c4d5"
-    ): List<City>
+    suspend fun getCities(countryId: String): List<City>
 
     suspend fun <T> wrapApiResponse(
         function: suspend () -> Response<T>,
