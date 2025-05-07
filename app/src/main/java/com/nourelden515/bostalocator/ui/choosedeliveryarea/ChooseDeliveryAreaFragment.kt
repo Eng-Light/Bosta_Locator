@@ -1,6 +1,8 @@
 package com.nourelden515.bostalocator.ui.choosedeliveryarea
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +43,10 @@ class ChooseDeliveryAreaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initiateAdapter()
+        initializeAdapter()
     }
 
-    private fun initiateAdapter() {
+    private fun initializeAdapter() {
         binding.citiesRecyclerView.adapter = cityAdapter
     }
 }

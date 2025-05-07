@@ -7,4 +7,7 @@
     <string name="choose_delivery_area">Choose Delivery Area</string>
     <string name="error_image">Error Image</string>
     <string name="image_placeholder">image placeholder</string>
+    <string name="city_area">City/Area</string>
+    <string name="close">Close</string>
+    <string name="expand">Expand</string>
 </resources>

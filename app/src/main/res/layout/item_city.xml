@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="item"
@@ -18,32 +19,51 @@
         android:id="@+id/city_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:onClick="@{() -> listener.onCityClick(item.cityId)}"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/city_name_text_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{item.cityName}"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Cairo" />
+                android:onClick="@{() -> listener.onCityClick(item.cityId)}"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp">
+
+                <TextView
+                    android:id="@+id/city_name_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{item.cityName}"
+                    android:textSize="16sp"
+                    tools:text="Cairo" />
+
+                <ImageView
+                    android:id="@+id/expand_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/expand"
+                    android:rotation="@{item.isExpanded ? 180 : 0}"
+                    android:src="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/districts_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="@{item.isExpanded ? android.view.View.VISIBLE : android.view.View.GONE}"
+                android:visibility="@{item.isExpanded ? View.VISIBLE : View.GONE}"
                 app:districtItems="@{item.districts}"
                 app:listener="@{listener}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

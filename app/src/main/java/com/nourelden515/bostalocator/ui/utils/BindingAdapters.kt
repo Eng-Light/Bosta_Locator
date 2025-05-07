@@ -37,21 +37,21 @@ fun hideIfLoading(view: View, condition: Boolean) {
 }
 
 @BindingAdapter(value = ["app:showIfNoItems", "app:hideIfLoading"])
-fun <T> showIfEmpty(view: View, items: List<T>, condition: Boolean) {
-    view.isVisible = condition == false && items.isEmpty()
+fun <T> showIfEmpty(view: View, items: List<T>?, loading: Boolean) {
+    view.isVisible = !loading && items.isNullOrEmpty()
 }
 
 @BindingAdapter("app:showIfNotEmpty")
-fun <T> showIfNotEmpty(view: View, items: List<T>) {
-    view.isVisible = items.isNotEmpty()
+fun <T> showIfNotEmpty(view: View, items: List<T>?) {
+    view.isVisible = !items.isNullOrEmpty()
 }
 
-@BindingAdapter("showIfError")
+@BindingAdapter("app:showIfError")
 fun View.showIfError(isError: Boolean) {
     visibility = if (isError) View.VISIBLE else View.GONE
 }
 
-@BindingAdapter("errorMessage")
+@BindingAdapter("app:errorMessage")
 fun View.showErrorToast(errorMessage: String?) {
     errorMessage?.let {
         if (it.isNotEmpty()) {

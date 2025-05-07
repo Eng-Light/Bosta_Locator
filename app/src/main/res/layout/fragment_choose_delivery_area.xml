@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.nourelden515.bostalocator.ui.choosedeliveryarea.ChooseDeliveryAreaViewModel" />
@@ -15,48 +14,83 @@
         android:layout_height="match_parent"
         tools:context=".ui.choosedeliveryarea.ChooseDeliveryAreaFragment">
 
-        <TextView
-            android:id="@+id/title_text_view"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/choose_delivery_area"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_delivery_area"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            app:endIconDrawable="@android:drawable/ic_menu_search"
+            app:endIconMode="custom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city_area"
+                android:inputType="text"
+                android:maxLines="1"
+                android:afterTextChanged="@{(query)->viewModel.onSearchQueryChanged(query)}"
+                android:text="@{viewModel.state.searchQuery}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cities_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="8dp"
             app:errorMessage="@{viewModel.state.error}"
-            app:items="@{viewModel.state.cities}"
+            app:items="@{viewModel.filteredCities}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text_view"
-            app:showIfNotEmpty="@{viewModel.state.cities}"
+            app:layout_constraintTop_toBottomOf="@+id/search_layout"
+            app:showIfNotEmpty="@{viewModel.filteredCities}"
             tools:listitem="@layout/item_city" />
 
         <ImageView
             android:id="@+id/image_view_placeholder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/image_placeholder"
             android:src="@drawable/ic_launcher_foreground"
             app:hideIfLoading="@{viewModel.state.isLoading}"
-            android:contentDescription="@string/image_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showIfNoItems="@{viewModel.state.cities}" />
+            app:showIfNoItems="@{viewModel.filteredCities}" />
 
         <TextView
             android:id="@+id/text_view_placeholder"
@@ -71,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="@id/image_view_placeholder"
             app:layout_constraintStart_toStartOf="@id/image_view_placeholder"
             app:layout_constraintTop_toBottomOf="@id/image_view_placeholder"
-            app:showIfNoItems="@{viewModel.state.cities}" />
+            app:showIfNoItems="@{viewModel.filteredCities}" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -125,8 +159,6 @@
                 android:layout_marginTop="16dp"
                 android:onClick="@{() -> viewModel.getAllCities()}"
                 android:text="@string/try_again" />
-
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

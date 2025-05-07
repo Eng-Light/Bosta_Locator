@@ -14,10 +14,13 @@ class CityAdapter(
     }
 
     override fun areContentSame(oldItem: CityUiState, newItem: CityUiState): Boolean {
-        return oldItem.isExpanded == newItem.isExpanded
+        return oldItem.isExpanded == newItem.isExpanded &&
+                oldItem.cityName == newItem.cityName &&
+                oldItem.districts == newItem.districts
     }
 }
 
 interface CityInteractionListener : BaseInteractionListener {
     fun onCityClick(cityId: String)
+    fun onDistrictClick(districtId: String)
 }

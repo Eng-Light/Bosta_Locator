@@ -6,6 +6,7 @@ import com.nourelden515.bostalocator.domain.model.District
 data class ChooseDeliveryAreaUiState(
     val isLoading: Boolean = false,
     val cities: List<CityUiState> = emptyList(),
+    val searchQuery: String = "",
     val error: String? = null,
     val isError: Boolean = false,
 )
