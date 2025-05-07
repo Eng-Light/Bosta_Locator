@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Bosta Locator</string>
+    <string name="network_error">Network Error</string>
+    <string name="please_check_your_internet_connection">Please check your internet connection</string>
+    <string name="try_again">Try Again</string>
+    <string name="no_cities_available">No Cities Available</string>
+    <string name="choose_delivery_area">Choose Delivery Area</string>
+    <string name="error_image">Error Image</string>
+    <string name="image_placeholder">image placeholder</string>
 </resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.nourelden515.bostalocator.ui.choosedeliveryarea.CityUiState" />
+
+        <variable
+            name="listener"
+            type="com.nourelden515.bostalocator.ui.choosedeliveryarea.CityInteractionListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/city_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:onClick="@{() -> listener.onCityClick(item.cityId)}"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/city_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.cityName}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Cairo" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/districts_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="@{item.isExpanded ? android.view.View.VISIBLE : android.view.View.GONE}"
+                app:districtItems="@{item.districts}"
+                app:listener="@{listener}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_district"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

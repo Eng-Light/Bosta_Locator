@@ -1,4 +1,4 @@
-package com.nourelden515.bostalocator.ui.base
+package com.nourelden515.bostalocator.ui.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

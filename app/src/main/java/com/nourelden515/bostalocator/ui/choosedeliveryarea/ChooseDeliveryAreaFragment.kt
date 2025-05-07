@@ -41,6 +41,11 @@ class ChooseDeliveryAreaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initiateAdapter()
+    }
 
+    private fun initiateAdapter() {
+        val citiesAdapter = CityAdapter(viewModel)
+        binding.citiesRecyclerView.adapter = citiesAdapter
     }
 }

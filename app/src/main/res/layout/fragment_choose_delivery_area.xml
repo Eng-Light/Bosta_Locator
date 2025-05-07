@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,15 +10,123 @@
             type="com.nourelden515.bostalocator.ui.choosedeliveryarea.ChooseDeliveryAreaViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.choosedeliveryarea.ChooseDeliveryAreaFragment">
 
         <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/choose_delivery_area"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cities_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp"
+            app:errorMessage="@{viewModel.state.error}"
+            app:items="@{viewModel.state.cities}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_view"
+            app:showIfNotEmpty="@{viewModel.state.cities}"
+            tools:listitem="@layout/item_city" />
+
+        <ImageView
+            android:id="@+id/image_view_placeholder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            app:hideIfLoading="@{viewModel.state.isLoading}"
+            android:contentDescription="@string/image_placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showIfNoItems="@{viewModel.state.cities}" />
+
+        <TextView
+            android:id="@+id/text_view_placeholder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/no_cities_available"
+            android:textSize="18sp"
+            app:hideIfLoading="@{viewModel.state.isLoading}"
+            app:layout_constraintEnd_toEndOf="@id/image_view_placeholder"
+            app:layout_constraintStart_toStartOf="@id/image_view_placeholder"
+            app:layout_constraintTop_toBottomOf="@id/image_view_placeholder"
+            app:showIfNoItems="@{viewModel.state.cities}" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showIfTrue="@{viewModel.state.isLoading}" />
+
+        <LinearLayout
+            android:id="@+id/error_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:background="?android:attr/colorBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:showIfError="@{viewModel.state.isError}">
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/error_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="@string/error_image"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:id="@+id/error_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/network_error"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/please_check_your_internet_connection"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/button_try_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewModel.getAllCities()}"
+                android:text="@string/try_again" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
