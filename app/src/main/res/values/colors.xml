@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="district_covered_background">#F5F5F5</color>
+    <color name="district_uncovered_background">#FFF5F5</color>
+    <color name="uncovered_text_color">#0F0F0F</color>
 </resources>
