@@ -13,7 +13,8 @@ import javax.inject.Singleton
         ApplicationModule::class,
         NetworkModule::class,
         RepositoryModule::class,
-        DataSourceModule::class
+        DataSourceModule::class,
+        UseCaseModule::class,
     ]
 )
 interface ApplicationComponent {
@@ -23,6 +24,7 @@ interface ApplicationComponent {
     fun viewModelsFactory(): ViewModelFactory
 
 
+    @Singleton
     @Component.Factory
     interface Factory {
         fun create(applicationModule: ApplicationModule): ApplicationComponent

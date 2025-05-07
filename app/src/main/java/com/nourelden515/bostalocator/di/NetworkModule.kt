@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+object NetworkModule {
     @Provides
     @Singleton
     fun provideLocatorApiService(retrofit: Retrofit): LocatorApiService {

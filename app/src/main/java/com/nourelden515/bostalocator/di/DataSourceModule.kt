@@ -8,10 +8,10 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DataSourceModule {
+object DataSourceModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideRemoteDataSource(apiService: LocatorApiService): RemoteDataSource {
         return BostaRemoteDataSource(apiService)
     }

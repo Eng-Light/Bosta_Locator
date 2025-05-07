@@ -8,10 +8,10 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RepositoryModule {
+object RepositoryModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideCityRepository(dataSource: RemoteDataSource): LocatorRepository {
         return LocatorRepositoryImpl(dataSource)
     }

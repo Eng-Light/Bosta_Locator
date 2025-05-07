@@ -2,17 +2,24 @@ package com.nourelden515.bostalocator.data.repository
 
 import com.nourelden515.bostalocator.data.repository.datasource.RemoteDataSource
 import com.nourelden515.bostalocator.data.source.remote.mapper.toEntity
-import com.nourelden515.bostalocator.data.source.remote.network.LocatorApiService
 import com.nourelden515.bostalocator.domain.model.City
 import com.nourelden515.bostalocator.domain.repository.LocatorRepository
+import javax.inject.Inject
 
-class LocatorRepositoryImpl(
+class LocatorRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ) : LocatorRepository {
 
+    private var districts: List<City> = listOf()
+
     override suspend fun getCities(
         countryId: String
-    ): List<City> = wrapApiResponse {
-        remoteDataSource.getAllDistricts(countryId)
-    }.data.toEntity()
+    ): List<City> {
+        return districts.ifEmpty {
+            wrapApiResponse {
+                remoteDataSource.getAllDistricts(countryId)
+            }.data.toEntity()
+                .also { districts = it }
+        }
+    }
 }

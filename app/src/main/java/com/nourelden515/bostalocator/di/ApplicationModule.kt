@@ -15,18 +15,18 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val context: Context) {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideContext(): Context = context
 
-    @Provides
     @Singleton
+    @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BASIC
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient {
@@ -39,18 +39,18 @@ class ApplicationModule(private val context: Context) {
             .build()
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideGson(): Gson = GsonBuilder().create()
 
-    @Provides
     @Singleton
+    @Provides
     fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory.create(gson)
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideRetrofit(
         client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,

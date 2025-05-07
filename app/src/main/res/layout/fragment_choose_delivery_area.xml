@@ -70,13 +70,13 @@
             android:orientation="vertical"
             android:paddingHorizontal="8dp"
             app:errorMessage="@{viewModel.state.error}"
-            app:items="@{viewModel.filteredCities}"
+            app:items="@{viewModel.state.cities}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_layout"
-            app:showIfNotEmpty="@{viewModel.filteredCities}"
+            app:showIfNotEmpty="@{viewModel.state.cities}"
             tools:listitem="@layout/item_city" />
 
         <ImageView
@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showIfNoItems="@{viewModel.filteredCities}" />
+            app:showIfNoItems="@{viewModel.state.cities}" />
 
         <TextView
             android:id="@+id/text_view_placeholder"
@@ -105,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="@id/image_view_placeholder"
             app:layout_constraintStart_toStartOf="@id/image_view_placeholder"
             app:layout_constraintTop_toBottomOf="@id/image_view_placeholder"
-            app:showIfNoItems="@{viewModel.filteredCities}" />
+            app:showIfNoItems="@{viewModel.state.cities}" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
