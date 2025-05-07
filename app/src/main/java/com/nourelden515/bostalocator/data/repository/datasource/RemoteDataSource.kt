@@ -5,7 +5,7 @@ import com.nourelden515.bostalocator.data.source.remote.model.CityDto
 import retrofit2.Response
 
 interface RemoteDataSource {
-    suspend fun getAllDistricts(
+    suspend fun getCities(
         countryId: String
     ): Response<BaseDto<List<CityDto>>>
 }

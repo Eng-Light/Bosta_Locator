@@ -16,19 +16,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:background="@{item.hasDropOffAvailability ? @color/district_covered_background : @color/district_uncovered_background}"
         android:onClick="@{() -> listener.onDistrictClick(item.id)}"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/district_name_text_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="12dp"
-            android:text="@{item.name}"
-            android:textSize="14sp"
-            tools:text="Nasr City" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/district_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:text="@{item.zone.name + ' ' + '-' + ' ' + item.name}"
+                android:textSize="14sp"
+                tools:text="Nasr City" />
+
+            <TextView
+                android:id="@+id/district_coverage_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:text="@string/uncovered"
+                android:textColor="@color/uncovered_text_color"
+                android:textSize="12sp"
+                android:visibility="@{item.hasDropOffAvailability ? android.view.View.GONE : android.view.View.VISIBLE}"
+                tools:visibility="visible" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

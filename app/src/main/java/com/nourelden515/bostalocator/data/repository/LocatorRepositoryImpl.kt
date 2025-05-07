@@ -10,16 +10,16 @@ class LocatorRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ) : LocatorRepository {
 
-    private var districts: List<City> = listOf()
+    private var cities: List<City> = listOf()
 
     override suspend fun getCities(
         countryId: String
     ): List<City> {
-        return districts.ifEmpty {
+        return cities.ifEmpty {
             wrapApiResponse {
-                remoteDataSource.getAllDistricts(countryId)
+                remoteDataSource.getCities(countryId)
             }.data.toEntity()
-                .also { districts = it }
+                .also { cities = it }
         }
     }
 }

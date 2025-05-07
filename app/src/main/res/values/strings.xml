@@ -10,4 +10,5 @@
     <string name="city_area">City/Area</string>
     <string name="close">Close</string>
     <string name="expand">Expand</string>
+    <string name="uncovered">Uncovered</string>
 </resources>

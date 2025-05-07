@@ -1,12 +1,12 @@
 package com.nourelden515.bostalocator.data.source.remote
 
 import com.nourelden515.bostalocator.data.repository.datasource.RemoteDataSource
-import com.nourelden515.bostalocator.data.source.remote.network.LocatorApiService
+import com.nourelden515.bostalocator.data.source.remote.network.BostaApiService
 import javax.inject.Inject
 
 class BostaRemoteDataSource @Inject constructor(
-    private val locatorApiService: LocatorApiService,
+    private val bostaApiService: BostaApiService,
 ) : RemoteDataSource {
-    override suspend fun getAllDistricts(countryId: String) =
-        locatorApiService.getAllDistricts(countryId)
+    override suspend fun getCities(countryId: String) =
+        bostaApiService.getCities(countryId)
 }

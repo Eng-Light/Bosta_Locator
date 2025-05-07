@@ -6,8 +6,8 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface LocatorApiService {
+interface BostaApiService {
     @GET("cities/getAllDistricts")
-    suspend fun getAllDistricts(@Query("countryId") countryId: String):
+    suspend fun getCities(@Query("countryId") countryId: String):
             Response<BaseDto<List<CityDto>>>
 }
