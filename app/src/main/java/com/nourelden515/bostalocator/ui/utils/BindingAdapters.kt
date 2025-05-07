@@ -36,15 +36,6 @@ fun hideIfLoading(view: View, condition: Boolean) {
     view.isVisible = !condition
 }
 
-@BindingAdapter("hideRvIfLoading")
-fun hideRvIfLoading(recyclerView: RecyclerView, isLoading: Boolean) {
-    if (isLoading) {
-        recyclerView.visibility = View.GONE
-    } else {
-        recyclerView.visibility = View.VISIBLE
-    }
-}
-
 @BindingAdapter(value = ["app:showIfNoItems", "app:hideIfLoading"])
 fun <T> showIfEmpty(view: View, items: List<T>, condition: Boolean) {
     view.isVisible = condition == false && items.isEmpty()

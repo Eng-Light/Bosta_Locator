@@ -14,11 +14,11 @@ import com.nourelden515.bostalocator.databinding.FragmentChooseDeliveryAreaBindi
 
 class ChooseDeliveryAreaFragment : Fragment() {
     private lateinit var _binding: FragmentChooseDeliveryAreaBinding
-    val binding get() = _binding
-
+    private val binding get() = _binding
     private val viewModel: ChooseDeliveryAreaViewModel by viewModels {
         (requireActivity().application as BostaLocatorApplication).appComponent.viewModelsFactory()
     }
+    private val cityAdapter: CityAdapter by lazy { CityAdapter(viewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +45,6 @@ class ChooseDeliveryAreaFragment : Fragment() {
     }
 
     private fun initiateAdapter() {
-        val citiesAdapter = CityAdapter(viewModel)
-        binding.citiesRecyclerView.adapter = citiesAdapter
+        binding.citiesRecyclerView.adapter = cityAdapter
     }
 }

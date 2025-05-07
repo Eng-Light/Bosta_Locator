@@ -24,7 +24,7 @@ class ChooseDeliveryAreaViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, isError = false, error = null) }
             try {
-                val cities = locatorRepository.getCities("60e4482c7cb7d4bc4849c4d5")
+                val cities = locatorRepository.getCities(DEFAULT_COUNTRY_ID)
                 _state.update { it.copy(isLoading = false, cities = cities.map { it.toUiState() }) }
             } catch (e: Exception) {
                 _state.update {
@@ -40,18 +40,19 @@ class ChooseDeliveryAreaViewModel @Inject constructor(
 
     private fun toggleCityExpansion(cityId: String) {
         _state.update { currentState ->
-            val updatedCities = currentState.cities.map { city ->
-                if (city.cityId == cityId) {
-                    city.copy(isExpanded = !city.isExpanded)
-                } else {
-                    city.copy(isExpanded = false)
+            currentState.copy(
+                cities = currentState.cities.map { city ->
+                    city.copy(isExpanded = city.cityId == cityId && !city.isExpanded)
                 }
-            }
-            currentState.copy(cities = updatedCities)
+            )
         }
     }
 
     override fun onCityClick(cityId: String) {
         toggleCityExpansion(cityId)
+    }
+
+    companion object {
+        private const val DEFAULT_COUNTRY_ID = "60e4482c7cb7d4bc4849c4d5"
     }
 }

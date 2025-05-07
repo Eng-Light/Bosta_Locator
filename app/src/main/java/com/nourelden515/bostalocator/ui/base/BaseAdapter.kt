@@ -47,18 +47,10 @@ abstract class BaseAdapter<T>(
         diffResult.dispatchUpdatesTo(this)
     }
 
-    open fun getItems(): List<T> {
-        return items
-    }
-
-    open fun getItemAt(position: Int): T {
-        return items[position]
-    }
-
     open fun areItemsSame(oldItem: T, newItem: T): Boolean {
         return oldItem?.equals(newItem) == true
     }
 
-    open fun areContentSame(oldPosition: T, newPosition: T) = true
+    open fun areContentSame(oldItem: T, newItem: T) = true
 
 }
